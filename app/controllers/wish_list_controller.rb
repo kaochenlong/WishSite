@@ -1,6 +1,7 @@
 class WishListController < ApplicationController
 
   def card
+    @wish_lists = WishList.all
   end
 
   def new_wish
@@ -20,5 +21,9 @@ class WishListController < ApplicationController
       # 借 new_wish.html.erb 來用
       # redirect_to new_wish_path, alert: "出錯了"
     end
+  end
+
+  def show_wish
+    render html: params
   end
 end

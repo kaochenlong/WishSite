@@ -1,3 +1,9 @@
 <h1>許願卡、清單</h1>
 
 <%= link_to "新增許願卡", new_wish_path %>
+
+<% @wish_lists.each do |wish_list| %>
+  <li>
+    <%= link_to wish_list.title, wish_card_info_path(wish_list) %>
+  </li>
+<% end %>
