@@ -4,19 +4,21 @@ class WishListController < ApplicationController
   end
 
   def new_wish
+    @wish_list = WishList.new
   end
 
   def create_wish
-    # 準備寫入資料庫
     # Strong Parameters
-    clean_params = params.require(:w).permit(:title, :description)
+    clean_params = params.require(:wish_list).permit(:title, :description)
 
-    w = WishList.new(clean_params)
+    @wish_list = WishList.new(clean_params)
 
-    if w.save
-      render html: "ok"
+    if @wish_list.save
+      redirect_to make_a_wish_path, notice: "成功新增許願卡！"
     else
-      render html: "fail"
+      render :new_wish
+      # 借 new_wish.html.erb 來用
+      # redirect_to new_wish_path, alert: "出錯了"
     end
   end
 end
