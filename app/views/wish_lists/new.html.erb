@@ -1,6 +1,6 @@
 <h1>新增許願卡</h1>
 
-<%= form_for @wish_list, url: "/wish_card_list" do |f| %>
+<%= form_for @wish_list do |f| %>
   <div>
     <%= f.label :title %>
     <%= f.text_field :title %>
