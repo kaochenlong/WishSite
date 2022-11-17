@@ -1,13 +1,3 @@
 <h1>編輯 WishList</h1>
 
-<%= form_for @wish_list do |f| %>
-  <div>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
-  <div>
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-  </div>
-  <%= f.submit %>
-<% end %>
+<%= render "form", wish_list: @wish_list %>
