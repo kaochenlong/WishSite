@@ -1,5 +1,7 @@
 class WishListController < ApplicationController
 
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+
   def card
     @wish_lists = WishList.all
   end
@@ -24,6 +26,14 @@ class WishListController < ApplicationController
   end
 
   def show_wish
-    render html: params
+    @wish_list = WishList.find(params[:id])
+    render html: @wish_list.title
+  end
+
+  private
+  def record_not_found
+    render file: "#{Rails.root}/public/404.html",
+           status: 404,
+           layout: false
   end
 end
