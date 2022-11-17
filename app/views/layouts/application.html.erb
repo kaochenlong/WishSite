@@ -11,15 +11,7 @@
   </head>
 
   <body>
-    <% if flash.any? %>
-      <div style="background-color: green; color: white">
-        <%= notice %>
-      </div>
-      <div style="background-color: red; color: white">
-        <%= alert %>
-      </div>
-    <% end %>
-
+    <%= render "shared/flash" %>
     <%= yield %>
   </body>
 </html>
