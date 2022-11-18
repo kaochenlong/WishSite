@@ -1,6 +1,7 @@
 <nav>
   <% if user_signed_in? %>
     <%= current_user.email %>
+    <%= link_to "我的許願卡", wish_lists_path %>
     <%= link_to "登出", session_path, method: "delete" %>
   <% else %>
     <%= link_to "註冊", new_users_path %>
