@@ -3,7 +3,7 @@ class WishListsController < ApplicationController
   before_action :find_wish_list, only: [:edit, :update, :destroy, :show]
 
   def index
-    @wish_lists = WishList.all
+    @wish_lists = current_user.wish_lists
   end
 
   def new
@@ -11,7 +11,7 @@ class WishListsController < ApplicationController
   end
 
   def create
-    @wish_list = WishList.new(wish_list_params)
+    @wish_list = current_user.wish_lists.build(wish_list_params)
 
     if @wish_list.save
       redirect_to root_path, notice: "成功新增許願卡！"
@@ -41,7 +41,8 @@ class WishListsController < ApplicationController
 
   private
   def find_wish_list
-    @wish_list = WishList.find(params[:id])
+    @wish_list = current_user.wish_lists.find(params[:id])
+    # @wish_list = WishLists.find_by!(id: params[:id], user_id: current_user.id)
   end
 
   def wish_list_params
