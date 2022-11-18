@@ -1,5 +1,9 @@
 <nav>
-  <%= link_to "註冊", new_users_path %>
-  <%= link_to "登入", login_users_path %>
-  <%= link_to "登出", session_path, method: "delete" %>
+  <% if user_signed_in? %>
+    <%= current_user.email %>
+    <%= link_to "登出", session_path, method: "delete" %>
+  <% else %>
+    <%= link_to "註冊", new_users_path %>
+    <%= link_to "登入", login_users_path %>
+  <% end %>
 </nav>
