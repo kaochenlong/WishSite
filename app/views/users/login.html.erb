@@ -1,1 +1,13 @@
 <h1>登入</h1>
+
+<%= form_with(url: session_path ) do |f| %>
+  <div>
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+  </div>
+  <div>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+  <%= f.submit "登入" %>
+<% end %>
