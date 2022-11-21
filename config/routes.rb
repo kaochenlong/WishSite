@@ -10,7 +10,9 @@ Rails.application.routes.draw do
 
   resource :session, only: [:create, :destroy]
 
-  resources :wish_lists
+  resources :wish_lists do
+    resources :comments, shallow: true, only: [:create, :destroy]
+  end
 
   root "wish_lists#index"
 end

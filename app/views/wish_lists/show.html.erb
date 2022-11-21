@@ -5,4 +5,18 @@
   <article>
     <%= simple_format(@wish_list.description) %>
   </article>
+
+  <%= form_with(model: @comment, url: wish_list_comments_path(@wish_list)) do |f| %>
+    <div>
+      <div>留言：</div>
+      <%= f.text_area :content %><br />
+      <%= f.submit "新增留言" %>
+    </div>
+  <% end %>
+
+  <ul>
+  <% @comments.each do |comment| %>
+    <li><%= comment.content %></li>
+  <% end %>
+  </ul>
 </section>
