@@ -6,7 +6,7 @@
     <%= simple_format(@wish_list.description) %>
   </article>
 
-  <%= form_with(model: @comment, url: wish_list_comments_path(@wish_list)) do |f| %>
+  <%= form_with(model: @comment, url: wish_list_comments_path(@wish_list), local: false) do |f| %>
     <div>
       <div>留言：</div>
       <%= f.text_area :content %><br />
@@ -14,9 +14,7 @@
     </div>
   <% end %>
 
-  <ul>
-  <% @comments.each do |comment| %>
-    <li><%= comment.content %></li>
-  <% end %>
+  <ul class="comments">
+    <%= render @comments %>
   </ul>
 </section>
