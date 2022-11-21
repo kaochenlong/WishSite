@@ -1,6 +1,12 @@
 <section>
   <header>
-    <h1><%= @wish_list.title %></h1>
+    <h1>
+      <%= @wish_list.title %>
+      <button data-controller="favorite-btn"
+              data-action="click->favorite-btn#toggle">
+        <span data-favorite-btn-target="text">NO</span>
+      </button>
+    </h1>
   </header>
   <article>
     <%= simple_format(@wish_list.description) %>
@@ -18,3 +24,6 @@
     <%= render @comments %>
   </ul>
 </section>
+
+<script>
+</script>
