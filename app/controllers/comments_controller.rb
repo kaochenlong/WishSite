@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment.destroy
-    redirect_to wish_list_path(@comment.wish_list), notice: "留言已刪除"
+    # redirect_to wish_list_path(@comment.wish_list), notice: "留言已刪除"
   end
 
   private
