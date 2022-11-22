@@ -1,6 +1,6 @@
 class WishListsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_wish_list, only: [:edit, :update, :destroy, :show]
+  before_action :find_wish_list, only: [:edit, :update, :destroy, :show, :like]
 
   def index
     @wish_lists = current_user.wish_lists
@@ -42,7 +42,15 @@ class WishListsController < ApplicationController
   end
 
   def like
-    render json: {status: "ok", id: 123, aa: 456}
+    if current_user.liked_wish_lists.include?(@wish_list)
+      # 移除 like
+      current_user.like_wish_lists.delete(@wish_list)
+    else
+      # 新增 like
+      current_user.like_wish_lists << (@wish_list)
+    end
+
+    render json: {}
   end
 
   private

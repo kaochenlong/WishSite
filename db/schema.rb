@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_21_043214) do
+ActiveRecord::Schema.define(version: 2022_11_22_060649) do
 
   create_table "comments", force: :cascade do |t|
     t.text "content"
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(version: 2022_11_21_043214) do
     t.index ["deleted_at"], name: "index_comments_on_deleted_at"
     t.index ["user_id"], name: "index_comments_on_user_id"
     t.index ["wish_list_id"], name: "index_comments_on_wish_list_id"
+  end
+
+  create_table "like_wish_lists", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "wish_list_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_like_wish_lists_on_user_id"
+    t.index ["wish_list_id"], name: "index_like_wish_lists_on_wish_list_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -45,4 +54,6 @@ ActiveRecord::Schema.define(version: 2022_11_21_043214) do
   end
 
   add_foreign_key "comments", "users"
+  add_foreign_key "like_wish_lists", "users"
+  add_foreign_key "like_wish_lists", "wish_lists"
 end
