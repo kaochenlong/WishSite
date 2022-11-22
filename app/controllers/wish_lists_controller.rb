@@ -60,6 +60,6 @@ class WishListsController < ApplicationController
   end
 
   def wish_list_params
-    params.require(:wish_list).permit(:title, :description)
+    params.require(:wish_list).permit(:title, :description, :publish_date)
   end
 end

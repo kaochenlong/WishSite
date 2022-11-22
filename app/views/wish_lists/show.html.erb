@@ -12,8 +12,8 @@
       </button>
     </h1>
   </header>
-  <article>
-    <%= simple_format(@wish_list.description) %>
+  <article data-controller="markdown">
+    <%= @wish_list.description %>
   </article>
 
   <%= form_with(model: @comment, url: wish_list_comments_path(@wish_list), local: false) do |f| %>
