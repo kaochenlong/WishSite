@@ -24,6 +24,25 @@ export default class extends Controller {
       this.iconTarget.classList.add("fa-solid");
     }
 
+    const token = document.querySelector("meta[name='csrf-token']").content;
+
+    const id = this.element.dataset.id;
+
+    fetch(`/wish_lists/${id}/like`, {
+      method: "PATCH",
+      headers: {
+        "X-CSRF-Token": token,
+      },
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log("error!!");
+      });
+
     this.btnState = !this.btnState;
   }
 }

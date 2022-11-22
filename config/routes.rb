@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   resource :session, only: [:create, :destroy]
 
   resources :wish_lists do
+    member do
+      patch :like
+    end
+
     resources :comments, shallow: true, only: [:create, :destroy]
   end
 

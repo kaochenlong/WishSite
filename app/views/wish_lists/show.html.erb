@@ -3,7 +3,9 @@
     <h1>
       <%= @wish_list.title %>
       <button data-controller="favorite-btn"
-              data-action="click->favorite-btn#toggle">
+              data-action="click->favorite-btn#toggle"
+              data-id="<%= @wish_list.id %>"
+              >
         <i class="fa-regular fa-thumbs-up"
            data-favorite-btn-target="icon"></i>
       </button>
