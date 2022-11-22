@@ -5,6 +5,7 @@
       <button data-controller="favorite-btn"
               data-action="click->favorite-btn#toggle"
               data-id="<%= @wish_list.id %>"
+              data-liked="<%= current_user.liked_wish_lists.include?(@wish_list) %>"
               >
         <i class="fa-regular fa-thumbs-up"
            data-favorite-btn-target="icon"></i>

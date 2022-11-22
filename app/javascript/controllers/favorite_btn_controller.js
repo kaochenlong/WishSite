@@ -7,23 +7,16 @@ export default class extends Controller {
   static targets = ["icon"];
 
   initialize() {
-    this.btnState = false;
     library.add(thumbsUpSolid, thumbsUpRegular);
   }
 
   connect() {
     dom.watch();
+
+    this.#setLikedState(this.element.dataset.liked === "true");
   }
 
   toggle() {
-    if (this.btnState) {
-      this.iconTarget.classList.add("fa-regular");
-      this.iconTarget.classList.remove("fa-solid");
-    } else {
-      this.iconTarget.classList.remove("fa-regular");
-      this.iconTarget.classList.add("fa-solid");
-    }
-
     const token = document.querySelector("meta[name='csrf-token']").content;
 
     const id = this.element.dataset.id;
@@ -35,14 +28,21 @@ export default class extends Controller {
       },
     })
       .then((resp) => resp.json())
-      .then((data) => {
-        console.log(data);
+      .then(({ status }) => {
+        this.#setLikedState(status === "liked");
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         console.log("error!!");
       });
+  }
 
-    this.btnState = !this.btnState;
+  #setLikedState(state) {
+    if (state) {
+      this.iconTarget.classList.add("fa-solid");
+      this.iconTarget.classList.remove("fa-regular");
+    } else {
+      this.iconTarget.classList.add("fa-regular");
+      this.iconTarget.classList.remove("fa-solid");
+    }
   }
 }
