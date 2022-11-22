@@ -1,21 +1,27 @@
 import { Controller } from "stimulus";
+import { library, dom } from "@fortawesome/fontawesome-svg-core";
+import { faThumbsUp as thumbsUpSolid } from "@fortawesome/free-solid-svg-icons";
+import { faThumbsUp as thumbsUpRegular } from "@fortawesome/free-regular-svg-icons";
 
 export default class extends Controller {
-  static targets = ["text"];
+  static targets = ["icon"];
 
   initialize() {
     this.btnState = false;
+    library.add(thumbsUpSolid, thumbsUpRegular);
   }
 
   connect() {
-    // console.log(this.element);
+    dom.watch();
   }
 
   toggle() {
     if (this.btnState) {
-      this.textTarget.textContent = "NO";
+      this.iconTarget.classList.add("fa-regular");
+      this.iconTarget.classList.remove("fa-solid");
     } else {
-      this.textTarget.textContent = "YES";
+      this.iconTarget.classList.remove("fa-regular");
+      this.iconTarget.classList.add("fa-solid");
     }
 
     this.btnState = !this.btnState;

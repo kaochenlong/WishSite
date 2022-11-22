@@ -4,7 +4,8 @@
       <%= @wish_list.title %>
       <button data-controller="favorite-btn"
               data-action="click->favorite-btn#toggle">
-        <span data-favorite-btn-target="text">NO</span>
+        <i class="fa-regular fa-thumbs-up"
+           data-favorite-btn-target="icon"></i>
       </button>
     </h1>
   </header>
