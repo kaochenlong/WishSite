@@ -10,4 +10,8 @@ class WishList < ApplicationRecord
   has_many :comments
   has_many :like_wish_lists
   has_many :liked_users, through: :like_wish_lists, source: :user
+
+  def liked_by?(u)
+    liked_users.include?(u)
+  end
 end

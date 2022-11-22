@@ -22,6 +22,7 @@ class User < ApplicationRecord
   end
 
   private
+
   def encrypt_password
     self.password = Digest::SHA1.hexdigest("xy#{self.password.reverse}zz")
   end

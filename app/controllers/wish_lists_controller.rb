@@ -42,7 +42,7 @@ class WishListsController < ApplicationController
   end
 
   def like
-    if current_user.liked_wish_lists.include?(@wish_list)
+    if @wish_list.liked_by?(current_user)
       # 移除 like
       current_user.liked_wish_lists.delete(@wish_list)
       render json: {status: "unliked"}
