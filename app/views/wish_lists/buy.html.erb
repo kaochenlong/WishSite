@@ -1,7 +1,9 @@
 <h1><%= @wish_list.title %></h1>
 
 <div data-controller="order-amount"
-     data-price="<%= @wish_list.amount %>">
+     data-price="<%= @wish_list.amount %>"
+     data-action="update-quantity@document->order-amount#updateQuantity"
+     >
   單價：<%= @wish_list.amount %>
   ，小計：<span data-order-amount-target="amount"></span>
 </div>
