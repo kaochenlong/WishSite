@@ -1,0 +1,17 @@
+<h1><%= @wish_list.title %></h1>
+
+<div data-controller="order-amount"
+     data-price="<%= @wish_list.amount %>">
+  單價：<%= @wish_list.amount %>
+  ，小計：<span data-order-amount-target="amount"></span>
+</div>
+
+<hr>
+
+<%= form_with(url: '#', data: { controller: "order-quantity" }) do |f| %>
+  <button data-action="click->order-quantity#decrement">-</button>
+  <input data-order-quantity-target="quantity" type="number" name="quantity" value="1" min="1" max="5">
+  <button data-action="click->order-quantity#increment">+</button>
+
+  <button>結帳！</button>
+<% end %>

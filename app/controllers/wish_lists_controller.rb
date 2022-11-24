@@ -1,6 +1,6 @@
 class WishListsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_wish_list, only: [:edit, :update, :destroy, :show, :like]
+  before_action :find_wish_list, only: [:edit, :update, :destroy, :show, :like, :buy]
 
   def index
     @wish_lists = current_user.wish_lists
@@ -53,6 +53,9 @@ class WishListsController < ApplicationController
     end
   end
 
+  def buy
+  end
+
   private
 
   def find_wish_list
@@ -60,6 +63,6 @@ class WishListsController < ApplicationController
   end
 
   def wish_list_params
-    params.require(:wish_list).permit(:title, :description, :publish_date)
+    params.require(:wish_list).permit(:title, :description, :publish_date, :amount)
   end
 end

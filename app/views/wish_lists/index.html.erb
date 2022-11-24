@@ -4,8 +4,9 @@
 
 <% @wish_lists.each do |wish_list| %>
   <li>
+    <%= link_to "購買", buy_wish_list_path(wish_list) %>
     <%= link_to "編輯", edit_wish_list_path(wish_list) %>
     <%= link_to "刪除", wish_list_path(wish_list), method: "delete", data: {confirm: "確定嗎"} %>
-    <%= link_to wish_list.title, wish_list_path(wish_list) %>
+    <%= link_to "#{wish_list.title} (#{wish_list.amount})", wish_list_path(wish_list) %>
   </li>
 <% end %>
