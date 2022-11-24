@@ -10,7 +10,8 @@
 
 <hr>
 
-<%= form_with(url: '#', data: { controller: "order-quantity" }) do |f| %>
+<%= form_with(url: orders_path, method: 'post', data: { controller: "order-quantity" }) do |f| %>
+  <input type="hidden" name="wish_list_id" value="<%= @wish_list.id %>">
   <button data-action="click->order-quantity#decrement">-</button>
   <input data-order-quantity-target="quantity" type="number" name="quantity" value="1" min="1" max="5">
   <button data-action="click->order-quantity#increment">+</button>

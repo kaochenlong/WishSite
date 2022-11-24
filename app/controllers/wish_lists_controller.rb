@@ -1,6 +1,6 @@
 class WishListsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_wish_list, only: [:edit, :update, :destroy, :show, :like, :buy]
+  before_action :find_wish_list, only: [:edit, :update, :destroy, :show, :like, :buy, :checkout]
 
   def index
     @wish_lists = current_user.wish_lists
