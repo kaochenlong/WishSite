@@ -1,3 +1,9 @@
 <h1>結帳</h1>
 
-<%= params %>
+<%= form_with(url: pay_order_path(id: @order.serial),
+              method: "post",
+              data: {
+                controller: "paypal-dropin",
+                token: @token
+              }) do |f| %>
+<% end %>

@@ -9,6 +9,7 @@
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.4.3",
+    "braintree-web-drop-in": "^1.33.7",
     "marked": "^4.2.3",
     "stimulus": "^3.1.1",
     "turbolinks": "^5.2.0",

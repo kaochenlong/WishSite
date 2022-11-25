@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :orders, only: [:create] do
     member do
       get :checkout
+      post :pay
     end
   end
 
