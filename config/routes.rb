@@ -1,14 +1,16 @@
-Rails.application.routes.draw do
-  get "/about", to: "pages#about"
-  get "/contact", to: "pages#contact"
+# frozen_string_literal: true
 
-  resource :user, as: "users" do
+Rails.application.routes.draw do
+  get '/about', to: 'pages#about'
+  get '/contact', to: 'pages#contact'
+
+  resource :user, as: 'users' do
     collection do
       get :login   # /user/login
     end
   end
 
-  resource :session, only: [:create, :destroy]
+  resource :session, only: %i[create destroy]
 
   resources :orders, only: [:create] do
     member do
@@ -23,8 +25,8 @@ Rails.application.routes.draw do
       get :buy
     end
 
-    resources :comments, shallow: true, only: [:create, :destroy]
+    resources :comments, shallow: true, only: %i[create destroy]
   end
 
-  root "wish_lists#index"
+  root 'wish_lists#index'
 end

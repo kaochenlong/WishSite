@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :find_wish_list, only: [:create]
@@ -7,15 +9,15 @@ class OrdersController < ApplicationController
     amount = @wish_list.amount * quantity
 
     order = current_user.orders.new(
-      amount: amount,
-      quantity: quantity,
+      amount:,
+      quantity:,
       wish_list: @wish_list
     )
 
     if order.save
       redirect_to checkout_order_path(id: order.serial)
     else
-      redirect_to buy_wish_list_path(@wish_list), alert: "訂單建立失敗"
+      redirect_to buy_wish_list_path(@wish_list), alert: '訂單建立失敗'
     end
   end
 
@@ -27,20 +29,25 @@ class OrdersController < ApplicationController
   def pay
     order = Order.find_by!(serial: params[:id])
 
-    result = gateway.transaction.sale(
-      amount: order.amount,
-      payment_method_nonce: params[:nonce]
-    )
+    if order.may_pay?
+      result = gateway.transaction.sale(
+        amount: order.amount,
+        payment_method_nonce: params[:nonce]
+      )
 
-    if result.success?
-      # 改變訂單狀態
-      redirect_to root_path, notice: '付款成功'
+      if result.success?
+        order.pay!
+        redirect_to root_path, notice: '付款成功'
+      else
+        redirect_to root_path, alert: '付款發生問題'
+      end
     else
-      redirect_to root_path, alert: '付款發生問題'
+      redirect_to root_path, alert: '訂單查詢錯誤'
     end
   end
 
   private
+
   def find_wish_list
     @wish_list = WishList.find(params[:wish_list_id])
   end
@@ -48,9 +55,9 @@ class OrdersController < ApplicationController
   def gateway
     Braintree::Gateway.new(
       environment: :sandbox,
-      merchant_id: ENV['BRAINTREE_MERCHANT_ID'],
-      public_key: ENV['BRAINTREE_PUBLIC_KEY'],
-      private_key: ENV['BRAINTREE_PRIVATE_KEY'],
+      merchant_id: ENV.fetch('BRAINTREE_MERCHANT_ID', nil),
+      public_key: ENV.fetch('BRAINTREE_PUBLIC_KEY', nil),
+      private_key: ENV.fetch('BRAINTREE_PRIVATE_KEY', nil)
     )
   end
 end
